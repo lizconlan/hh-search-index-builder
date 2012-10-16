@@ -46,16 +46,6 @@ class Contribution < ActiveRecord::Base
     "/#{sitting.sitting_type_name}/#{date.strftime("%Y/%b/%d")}/#{section.slug}##{anchor_id}".downcase()
   end
   
-  def person_id
-    if commons_membership
-      commons_membership.person_id
-    elsif lords_membership
-      lords_membership.person_id
-    else
-      nil
-    end
-  end
-  
   def speaker_name
     if person
       person.name
@@ -79,12 +69,16 @@ class Contribution < ActiveRecord::Base
     HTMLEntities.new.decode(solr_text)
   end
   
+  def date
+    section.date
+  end
+  
   def year
     date.year
   end
   
   def decade
-    date.decade
+    year / 10 * 10
   end
 
   def sitting
@@ -96,11 +90,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def sitting_type
-    section.sitting_type
-  end
-
-  def date
-    section.date
+    sitting.sitting_type_name
   end
 end
 
