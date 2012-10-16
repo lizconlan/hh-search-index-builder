@@ -3,7 +3,6 @@ Bundler.setup
 
 require 'rake'
 require 'mysql'
-require 'sunspot'
 require 'active_record'
 require 'sinatra'
 
@@ -27,10 +26,10 @@ require './models/grand_committee_report_sitting'
 require './models/lords_written_answers_sitting'
 require './models/lords_written_statements_sitting'
 
+require './lib/indexer'
 
-task :test do
-  #Sunspot.config.solr.url = ENV['WEBSOLR_URL'] || YAML::load(File.read("config/websolr.yml"))[:websolr_url]
-  
+
+task :test do  
   dbconfig = YAML::load(File.open 'config/database.yml')[ Sinatra::Application.environment.to_s ]
   ActiveRecord::Base.establish_connection(dbconfig)
   
@@ -43,4 +42,15 @@ task :test do
   p c.speaker_name
   p c.speaker_url
   p c.solr_text
+end
+
+task :index_contributions do
+  dbconfig = YAML::load(File.open 'config/database.yml')[ Sinatra::Application.environment.to_s ]
+  ActiveRecord::Base.establish_connection(dbconfig)
+  
+  indexer = Indexer.new
+  
+  Contribution.all.each do |contribution|
+    indexer.add_document(contribution)
+  end
 end
