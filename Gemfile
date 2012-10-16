@@ -11,6 +11,7 @@ gem 'mysql'
 gem 'activerecord'
 gem 'hpricot'
 gem 'htmlentities'
+gem 'sanitize'
 
 group :development do
   gem 'shotgun'

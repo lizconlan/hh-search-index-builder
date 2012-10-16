@@ -1,7 +1,9 @@
 require 'sunspot'
 require 'htmlentities'
+require 'hpricot'
+require 'sanitize'
 
-class Contribution < ActiveRecord::Base
+class Contribution < ActiveRecord::Base 
   belongs_to :section
   belongs_to :commons_membership
   belongs_to :lords_membership
@@ -13,7 +15,6 @@ class Contribution < ActiveRecord::Base
   #                                      {:decade => :facet},
   #                                      {:sitting_type => :facet}],
   #              :facets => [:person_id, {:date => :date}, :year, :decade ]  
-  
   
   Sunspot.setup(Contribution) do
     string :sitting_type, :stored => true
@@ -74,7 +75,7 @@ class Contribution < ActiveRecord::Base
   def solr_text
     return nil unless text
     solr_text = text.gsub(/<col>\d+<\/col>/, '')
-    solr_text = strip_tags(solr_text)
+    solr_text = Sanitize.clean(solr_text)
     HTMLEntities.new.decode(solr_text)
   end
   

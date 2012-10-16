@@ -42,4 +42,5 @@ task :test do
   p c.section.date
   p c.speaker_name
   p c.speaker_url
+  p c.solr_text
 end
