@@ -1,0 +1,2 @@
+class QuoteContribution < Contribution
+end

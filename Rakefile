@@ -25,6 +25,10 @@ require './models/commons_written_statements_sitting'
 require './models/grand_committee_report_sitting'
 require './models/lords_written_answers_sitting'
 require './models/lords_written_statements_sitting'
+require './models/division_placeholder'
+require './models/unparsed_division_placeholder'
+require './models/table_contribution'
+require './models/quote_contribution'
 
 require './lib/indexer'
 
@@ -50,7 +54,8 @@ task :index_contributions do
   
   indexer = Indexer.new
   
-  Contribution.all.each do |contribution|
+  Contribution.find_each do |contribution|
+    p contribution.subject
     indexer.add_document(contribution)
   end
 end

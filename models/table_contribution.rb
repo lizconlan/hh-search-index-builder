@@ -1,0 +1,2 @@
+class TableContribution < Contribution
+end
