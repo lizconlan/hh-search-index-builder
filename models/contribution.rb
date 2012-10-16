@@ -21,7 +21,7 @@ class Contribution < ActiveRecord::Base
     string :subject, :stored => true
     string :speaker_name, :stored => true
     string :speaker_url, :stored => true #instead of person_id
-    text :text, :stored => true
+    text :solr_text, :stored => true
     string :url, :stored => true
     time :date, :stored => true
     integer :year, :stored => true
