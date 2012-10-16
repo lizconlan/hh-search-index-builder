@@ -8,7 +8,6 @@ class CommonsWrittenAnswersSitting < WrittenAnswersSitting
   end
   
   protected
-  
     def self.hansard_reference_prefix
       "HC"
     end
