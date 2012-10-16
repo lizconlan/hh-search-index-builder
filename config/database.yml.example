@@ -1,0 +1,21 @@
+development:
+  adapter: mysql
+  database: hansard_admin_production
+  username: 
+  password: 
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql
+  database: hansard_test
+  username: 
+  password: 
+  socket: /tmp/mysql.sock
+    
+    
+production:
+  adapter: mysql
+  database: hansard_development
+  username: 
+  password: 
+  socket: /tmp/mysql.sock

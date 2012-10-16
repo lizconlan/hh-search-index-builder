@@ -1,0 +1,2 @@
+class ProceduralContribution < Contribution
+end
