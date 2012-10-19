@@ -9,7 +9,7 @@ end
 
 get "/" do
   query = "the"
-  url = WEBSOLR_URL + "/select/?q=solr_text_texts:#{CGI::escape(query)}&facet=true&facet.field=decade_is&facet.field=year_is&facet.field=sitting_type_ss&facet.field=speaker_name_ss&wt=json&hl.fragsize=150&hl=true&hl.fl=solr_text_texts&facet.zeros=false"
+  url = WEBSOLR_URL + "/select/?q=solr_text_texts:#{CGI::escape(query)}&facet=true&facet.field=decade_is&facet.field=year_is&facet.field=sitting_type_ss&facet.field=speaker_url_ss&wt=json&hl.fragsize=150&hl=true&hl.fl=solr_text_texts&facet.zeros=false"
   #&sort=date_ds+desc
   #&fq=speaker_name_ss:%22Mr%20Isaac%20Corry%22
   #&facet.query=decade_is:1800
@@ -21,7 +21,7 @@ get "/" do
   
   p result["facet_counts"]["facet_fields"].inspect
   
-  speaker_data = result["facet_counts"]["facet_fields"]["speaker_name_ss"]
+  speaker_data = result["facet_counts"]["facet_fields"]["speaker_url_ss"]
   if speaker_data.is_a?(Array)
     speakers = format_facets(speaker_data)
     html << "Show only contributions by: #{speakers.join(" ")}"
