@@ -16,12 +16,16 @@ GEM
     hpricot (0.8.6)
     htmlentities (4.2.4)
     i18n (0.5.0)
+    json (1.5.4)
+    mime-types (1.18)
     mysql (2.8.1)
     nokogiri (1.4.7)
     pr_geohash (1.0.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rsolr (0.12.1)
       builder (>= 2.1.2)
     sanitize (2.0.3)
@@ -46,7 +50,9 @@ DEPENDENCIES
   activerecord
   hpricot
   htmlentities
+  json (= 1.5.4)
   mysql
+  rest-client (= 1.6.7)
   sanitize
   shotgun
   sinatra
