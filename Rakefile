@@ -2,7 +2,6 @@ require 'bundler'
 Bundler.setup
 
 require 'rake'
-require 'mysql'
 require 'active_record'
 require 'sinatra'
 
