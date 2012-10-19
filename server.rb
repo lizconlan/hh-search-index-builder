@@ -3,8 +3,14 @@ require 'sunspot'
 require 'rest-client'
 require 'json'
 
+require 'active_record'
+require './models/person'
+
 before do
   WEBSOLR_URL = "http://127.0.0.1:8983/solr"
+  
+  dbconfig = YAML::load(File.open 'config/database.yml')[ Sinatra::Application.environment.to_s ]
+  ActiveRecord::Base.establish_connection(dbconfig)
 end
 
 get "/" do
@@ -23,8 +29,12 @@ get "/" do
   
   speaker_data = result["facet_counts"]["facet_fields"]["speaker_url_ss"]
   if speaker_data.is_a?(Array)
-    speakers = format_facets(speaker_data)
-    html << "Show only contributions by: #{speakers.join(" ")}"
+    speakers = facets_to_hash(speaker_data)
+    speaker_list = []
+    speakers.each do |name, count|
+      speaker_list << "#{format_name(name)} (#{count})"
+    end
+    html << "Show only contributions by: #{speaker_list.join(" ")}"
   end
   
   html << "Showing blah to blah blah of #{result["response"]["numFound"]}"
@@ -43,20 +53,24 @@ get "/" do
   "<div>#{html.join("</div><div>")}</div>"
 end
 
-def format_facets(facet_array)
-  output = []
+def facets_to_hash(facet_array)
+  output = {}
   if facet_array.is_a?(Array)
     field_count = ""
     while facet_array.length > 0
-      p 
       if field_count == ""
-        field_count = "(#{facet_array.pop})"
+        field_count = facet_array.pop.to_i
       else
-        output << "#{facet_array.pop} #{field_count}"
+        output[facet_array.pop] = field_count
         field_count = ""
       end
     end
-    output.reverse!
   end
-  output
+  output.sort_by{ |name, count| count }.reverse
+end
+
+def format_name(url)
+  slug = url.split("/").pop
+  person = Person.find_by_slug(slug)
+  person.name
 end
