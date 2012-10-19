@@ -2,9 +2,11 @@ require 'sinatra'
 require 'sunspot'
 require 'rest-client'
 require 'json'
+require 'haml'
 
 require 'active_record'
 require './models/person'
+require './models/search_result'
 
 before do
   WEBSOLR_URL = "http://127.0.0.1:8983/solr"
@@ -41,16 +43,11 @@ get "/" do
   
   result["response"]["docs"].each do |search_result|
     id = search_result["id"]
-    html << search_result["subject_ss"]
-    html << search_result["url_ss"]
-    html << search_result["speaker_name_ss"] if search_result["speaker_name_ss"]
-    html << search_result["sitting_type_ss"]
-    item_date = search_result["date_ds"]
-    html << Date.parse(item_date).strftime("%B %d, %Y")
-    html << result["highlighting"][id]["solr_text_texts"]
+    result_line = SearchResult.new(search_result["subject_ss"], search_result["url_ss"], search_result["speaker_name_ss"], search_result["speaker_url_ss"], search_result["sitting_type_ss"], search_result["date_ds"], result["highlighting"][id]["solr_text_texts"].join(" "))
+    html << haml(:"_result", :locals => {:result => result_line}, :layout => false)
   end
   
-  "<div>#{html.join("</div><div>")}</div>"
+  "<html><head><style>blockquote{margin:1em 0;} .search-result-fragment{padding-bottom:1em;} .search-result blockquote{margin:0;} .search-result h4{font-style:normal;font-weight:normal;margin:0;display:inline;margin-right:0.2em;} .search-result-fragment em{font-style:normal;background-color:yellow;} .search-result .date{display:inline;color:green;font-size:85%;} .search-result cite{}</style><body><div>#{html.join("</div><div>")}</div></body></html>"
 end
 
 def facets_to_hash(facet_array)

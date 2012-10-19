@@ -13,6 +13,7 @@ GEM
     arel (2.0.9)
     builder (2.1.2)
     escape (0.0.4)
+    haml (3.1.4)
     hpricot (0.8.6)
     htmlentities (4.2.4)
     i18n (0.5.0)
@@ -48,6 +49,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  haml (= 3.1.4)
   hpricot
   htmlentities
   json (= 1.5.4)
