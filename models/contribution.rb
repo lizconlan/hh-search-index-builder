@@ -19,8 +19,7 @@ class Contribution < ActiveRecord::Base
   Sunspot.setup(Contribution) do
     string :sitting_type, :stored => true
     string :subject, :stored => true
-    string :speaker_name, :stored => true
-    string :speaker_url, :stored => true #instead of person_id
+    string :speaker_uid, :stored => true #instead of person_id
     text :solr_text, :stored => true
     string :url, :stored => true
     time :date, :stored => true
@@ -57,6 +56,14 @@ class Contribution < ActiveRecord::Base
   def speaker_url
     if person
       "/people/#{person.slug}"
+    else
+      nil
+    end
+  end
+  
+  def speaker_uid
+    if person
+      "#{speaker_url}|#{speaker_name}"
     else
       nil
     end
