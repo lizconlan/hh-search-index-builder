@@ -3,7 +3,6 @@ Bundler.setup
 
 require 'rake'
 require 'active_record'
-require 'sinatra'
 
 require './models/contribution'
 require './models/commons_membership'
@@ -33,7 +32,7 @@ require './lib/indexer'
 
 
 task :test do  
-  dbconfig = YAML::load(File.open 'config/database.yml')[ Sinatra::Application.environment.to_s ]
+  dbconfig = YAML::load(File.open 'config/database.yml')
   ActiveRecord::Base.establish_connection(dbconfig)
   
   p ""
@@ -48,7 +47,7 @@ task :test do
 end
 
 task :index_contributions do
-  dbconfig = YAML::load(File.open 'config/database.yml')[ Sinatra::Application.environment.to_s ]
+  dbconfig = YAML::load(File.open 'config/database.yml')
   ActiveRecord::Base.establish_connection(dbconfig)
   
   indexer = Indexer.new
