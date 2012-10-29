@@ -20,7 +20,7 @@ class Contribution < ActiveRecord::Base
     string :sitting_type, :stored => true
     string :subject, :stored => true
     string :speaker_uid, :stored => true #instead of person_id
-    text :solr_text, :stored => true
+    text :text, :stored => true
     string :url, :stored => true
     time :date, :stored => true
     integer :year, :stored => true
@@ -69,9 +69,8 @@ class Contribution < ActiveRecord::Base
     end
   end
   
-  def solr_text
-    return nil unless text
-    solr_text = text.gsub(/<col>\d+<\/col>/, '')
+  def text
+    solr_text = self[:text].gsub(/<col>\d+<\/col>/, '')
     solr_text = Sanitize.clean(solr_text)
     HTMLEntities.new.decode(solr_text)
   end
