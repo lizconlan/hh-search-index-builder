@@ -1,11 +1,8 @@
-# gem 'mongo_mapper', '0.9.2'
-# gem 'bson', '1.4.0'
-# gem 'bson_ext', '1.4.0'
-# gem 'builder', '2.1.2'
+source "http://rubygems.org"
 
 gem 'sunspot', '~> 1.2.1'
 gem 'mysql'
-gem 'activerecord'
+gem 'activerecord', '3.2.8'
 gem 'hpricot'
 gem 'htmlentities'
 gem 'sanitize'
