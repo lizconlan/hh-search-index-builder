@@ -20,6 +20,7 @@ class Contribution < ActiveRecord::Base
     string :sitting_type, :stored => true
     string :subject, :stored => true
     string :speaker_uid, :stored => true #instead of person_id
+    string :speaker_url, :stored => true
     text :text, :stored => true
     string :url, :stored => true
     time :date, :stored => true
