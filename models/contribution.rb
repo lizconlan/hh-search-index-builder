@@ -55,7 +55,7 @@ class Contribution < ActiveRecord::Base
   
   def speaker_url
     if person
-      "/people/#{person.slug}"
+      person.slug
     else
       nil
     end
