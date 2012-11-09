@@ -75,7 +75,7 @@ class Contribution < ActiveRecord::Base
   end
   
   def date
-    section.date
+    section.date.to_datetime.new_offset(0)
   end
   
   def year
