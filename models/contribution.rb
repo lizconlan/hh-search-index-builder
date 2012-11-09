@@ -24,8 +24,6 @@ class Contribution < ActiveRecord::Base
     text :text, :stored => true
     string :url, :stored => true
     time :date, :stored => true
-    integer :year, :stored => true
-    integer :decade, :stored => true
   end
   
   def person
@@ -87,15 +85,15 @@ class Contribution < ActiveRecord::Base
   def decade
     year / 10 * 10
   end
-
+  
   def sitting
     section.sitting
   end
-
+  
   def sitting_title
     sitting.title
   end
-
+  
   def sitting_type
     sitting.sitting_type_name
   end
