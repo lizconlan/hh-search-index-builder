@@ -1,5 +1,5 @@
 adapter: mysql
-database: hh_search_app
+database: hansard_admin_production
 username: 
 password: 
 socket: /tmp/mysql.sock
