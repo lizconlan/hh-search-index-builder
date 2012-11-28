@@ -27,6 +27,8 @@ require './models/division_placeholder'
 require './models/unparsed_division_placeholder'
 require './models/table_contribution'
 require './models/quote_contribution'
+require './models/oral_question_section'
+require './models/oral_questions_section'
 
 require './lib/indexer'
 
