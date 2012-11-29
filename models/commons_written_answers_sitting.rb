@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CommonsWrittenAnswersSitting < WrittenAnswersSitting
   def self.anchor
     "commons_#{self.uri_component}"

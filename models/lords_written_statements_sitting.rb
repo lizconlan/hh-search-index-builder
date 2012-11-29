@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LordsWrittenStatementsSitting < WrittenStatementsSitting
   def self.anchor
     "lords_#{self.uri_component}"

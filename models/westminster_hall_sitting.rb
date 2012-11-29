@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class WestminsterHallSitting < Sitting
   class << self
     def anchor

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class HouseOfCommonsSitting < Sitting
   
   def self.anchor

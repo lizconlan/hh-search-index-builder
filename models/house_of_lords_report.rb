@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class HouseOfLordsReport < Sitting
   def self.anchor
     self.uri_component

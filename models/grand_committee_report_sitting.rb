@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class GrandCommitteeReportSitting < Sitting
 
   has_one :section, :foreign_key => "sitting_id", :dependent => :destroy

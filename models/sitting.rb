@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Sitting < ActiveRecord::Base
   has_many :all_sections, :foreign_key => 'sitting_id', :class_name => "Section", :dependent => :destroy
   has_many :direct_descendents, :foreign_key => 'sitting_id', :class_name => "Section", :conditions => "parent_section_id is null"

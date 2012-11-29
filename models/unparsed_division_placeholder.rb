@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class UnparsedDivisionPlaceholder < DivisionPlaceholder
   def divided_text
     nil
