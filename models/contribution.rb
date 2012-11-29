@@ -71,8 +71,8 @@ class Contribution < ActiveRecord::Base
   end
   
   def text
-    solr_text = self[:text].gsub(/<col>\d+<\/col>/, '')
-    solr_text = solr_text.to_s.force_encoding("UTF-8")
+    solr_text = self[:text].to_s.force_encoding("UTF-8")
+    solr_text.gsub!(/<col>\d+<\/col>/, '')
     solr_text = Sanitize.clean(solr_text)
     HTMLEntities.new.decode(solr_text)
   end
