@@ -1,4 +1,4 @@
-incompatible character encodings: ASCII-8BIT and UTF-8
+# encoding: utf-8
 
 class CommonsMembership < ActiveRecord::Base
   belongs_to :person
