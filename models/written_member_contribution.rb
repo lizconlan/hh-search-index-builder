@@ -1,0 +1,2 @@
+class WrittenMemberContribution < MemberContribution
+end
